@@ -22,17 +22,18 @@ import Navbar from '../../components/UI/Navbar.js';
 import toast from "react-hot-toast";
 import {getToastStyles} from "../../utils/toastUtils.js";
 
-
+// Initial nodes and edges
 const initialNodes = [
     { id: '1', type: "textUpdater", position: { x: 50, y: 50 }, data: { message: 'Message number 1', isSelected: false }, },
     { id: '2', type: "textUpdater", position: { x: 350, y: 150 }, data: { message: 'Message number 2', isSelected: false },  },
 ];
 const initialEdges = [];
 
+// Retrieve saved nodes and edges from local storage
 const savedNodes = JSON.parse(window.localStorage.getItem('savedNodes'));
-
 const savedEdges = JSON.parse(window.localStorage.getItem('savedEdges'));
 
+// Defined custom node types
 const nodeTypes = {textUpdater: CustomTextNode}
 
 const Home = ({...props}) => {
@@ -41,6 +42,7 @@ const Home = ({...props}) => {
     const [pointerLocation, setPointerLocation] = useState({x: 0, y: 0});
     const [selectedNode, setSelectedNode] = useState({});
 
+    // Effect hook to update pointer location
     useEffect(() => {
         window.addEventListener('mousemove', (e) => setPointerLocation({x: e.clientX, y: e.clientY}))
 
@@ -49,14 +51,19 @@ const Home = ({...props}) => {
         }
     }, []);
 
+    // Callback for handling node changes
     const onNodesChange = useCallback(
         (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
         [setNodes]
     );
+
+    // Callback for handling edge changes
     const onEdgesChange = useCallback(
         (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
         [setEdges]
     );
+
+    // Callback for handling new connections
     const onConnect = useCallback(
         (connection) => {
             if(connection.source !== connection.target) {
@@ -80,6 +87,7 @@ const Home = ({...props}) => {
         [setEdges]
     );
 
+    // Callback for handling selection changes
     const onSelectionChange = useCallback(
         (selection) => {
             if(!_.isEmpty(selection.nodes)) {
@@ -107,6 +115,7 @@ const Home = ({...props}) => {
         [setSelectedNode, setNodes]
     );
 
+     // Function to add new nodes
     const addNodes = (pointer) => {
             const newNode = {
                 id: (nodes.length + 1).toString(),
@@ -119,6 +128,7 @@ const Home = ({...props}) => {
             setNodes((nds) => [...nds, newNode]);
     }
 
+    // Function to change nodes' data
     const changeNodes = (newNode, message) => {
         const tempNode = {...newNode}
         setNodes((nds) => nds.map(node => {
@@ -133,12 +143,14 @@ const Home = ({...props}) => {
         }));
     }
 
+    // Handler for drag end events
     const onDragEnd = (change) => {
         if(change?.destination?.droppableId === 'droppable-1') {
             addNodes(pointerLocation);
         }
     }
 
+    // Handler for text change in selected node
     const handleTextChange = (text) => {
         let newNode = {...selectedNode};
         newNode.data.message = text;
@@ -146,6 +158,7 @@ const Home = ({...props}) => {
         changeNodes(newNode, text)
     }
 
+    // Function to validate connections before saving
     const validateConnectionsForSaving = () => {
         let isValid = true;
         let message = "No connections";
@@ -181,6 +194,7 @@ const Home = ({...props}) => {
         return {isValid, error: message}
     }
 
+    // Handler for saving nodes and edges
     const handleSave = () => {
         let {isValid, error} = validateConnectionsForSaving();
         if(isValid) {
@@ -196,6 +210,7 @@ const Home = ({...props}) => {
         }
     }
 
+    // Handler for deselecting node
     const handleBack = () => {
         setSelectedNode({});
         onSelectionChange({nodes: [{}]})

@@ -3,11 +3,11 @@ const CustomTextNodeDummy = ({data, isConnectable, ...props}) => {
         <div style={{opacity: "80%", width: '200px'}} className={'custom-node'}>
             <div className={'custom-node-header'}>
                 <div style={{display: 'flex', gap: "8px"}}>
-                    <img height={'20px'} width={'20px'} src={'./assets/message.png'}/>
+                    <img height={'20px'} width={'20px'} src={'./assets/message.png'} alt="message"/>
                     <p className={'custom-node-header-text'}>Send Message</p>
                 </div>
                 <div style={{display: 'flex', backgroundColor: "white", padding: "2px", borderRadius: 50}}>
-                    <img height={'20px'} width={'20px'} src={'./assets/whatsapp.png'} />
+                    <img height={'20px'} width={'20px'} src={'./assets/whatsapp.png'} alt="whatsapp"/>
                 </div>
             </div>
             <div className={'custom-node-body'}>
