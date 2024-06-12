@@ -1,4 +1,4 @@
-import Button from "../Buttons/Button.js";
+import Button from "../Button/Button.js"
 
 const Navbar = ({onSave, ...props}) => {
 

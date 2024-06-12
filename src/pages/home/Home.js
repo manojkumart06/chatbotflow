@@ -10,17 +10,18 @@ import ReactFlow, {
     getConnectedEdges,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import SideMenu from "../../components/UI/SideMenu.jsx";
-import NodeButton from "../../components/Buttons/NodeButton.jsx";
+import SideMenu from '../../components/UI/SideMenu.js';
+import NodeButton from '../../components/Button/NodeButton.js';
 import './Home.css';
-import CustomTextNode from "./components/CustomTextNode.jsx";
+import CustomTextNode from '../components/CustomTextNode.js';
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
-import CustomTextNodeDummy from "./components/CustomTextNodeDummy.jsx";
+import CustomTextNodeDummy from '../components/CustomTextNodeDummy.js';
 import _ from "lodash";
-import NodeEditor from "./components/NodeEditor.jsx";
-import Navbar from "../../components/UI/Navbar.jsx";
+import NodeEditor from '../components/NodeEditor.js';
+import Navbar from '../../components/UI/Navbar.js';
 import toast from "react-hot-toast";
 import {getToastStyles} from "../../utils/toastUtils.js";
+
 
 const initialNodes = [
     { id: '1', type: "textUpdater", position: { x: 50, y: 50 }, data: { message: 'Message number 1', isSelected: false }, },

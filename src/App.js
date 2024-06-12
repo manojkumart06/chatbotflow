@@ -2,6 +2,8 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
+import Home from './pages/home/Home.js';
+import ErrorPage from './components/UI/ErrorPage.js';
 
 function App() {
   return (
